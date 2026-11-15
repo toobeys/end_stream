@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TikTok Neon End Stream</title>
+<title>TOOBEY — Stream Ended</title>
+
 <style>
 :root{
   --cyan:#55f3ff;
@@ -12,13 +13,24 @@
   --pink:#ff4fd8;
   --white:#f7f8ff;
 }
+
 *{box-sizing:border-box}
+
 html,body{
-  margin:0;width:100%;height:100%;
-  overflow:hidden;background:#02030d;
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#02030d;
   font-family:"Courier New",monospace;
 }
-body{display:grid;place-items:center}
+
+body{
+  display:grid;
+  place-items:center;
+}
+
+/* SCREEN 9:16 */
 .screen{
   position:relative;
   width:min(100vw,56.25vh);
@@ -29,66 +41,107 @@ body{display:grid;place-items:center}
   place-items:center;
   color:var(--white);
   container-type:size;
+
   background:
     radial-gradient(ellipse at 50% 42%,rgba(65,50,160,.38),transparent 60%),
     radial-gradient(circle at 10% 15%,rgba(149,101,255,.18),transparent 30%),
     radial-gradient(circle at 90% 85%,rgba(85,243,255,.13),transparent 30%),
     linear-gradient(180deg,#02030d,#09051b 55%,#030611);
 }
+
+/* STARS */
 .stars,.stars:before,.stars:after{
-  position:absolute;inset:0;content:"";
+  position:absolute;
+  inset:0;
+  content:"";
   pointer-events:none;
   background-image:radial-gradient(#fff 1px,transparent 1.5px);
   background-size:7.7cqw 9cqw;
   opacity:.3;
   animation:drift 24s linear infinite;
 }
+
 .stars:before{
   background-size:12cqw 11cqw;
-  opacity:.4;animation-duration:34s;
+  opacity:.4;
+  animation-duration:34s;
 }
+
 .stars:after{
   background-size:5cqw 6cqw;
-  opacity:.2;animation-duration:17s;
+  opacity:.2;
+  animation-duration:17s;
 }
-@keyframes drift{to{transform:translateY(9cqw)}}
+
+@keyframes drift{
+  to{transform:translateY(9cqw)}
+}
+
+/* GLOW */
 .glow{
   position:absolute;
-  width:40cqw;height:40cqw;
+  width:40cqw;
+  height:40cqw;
   border-radius:50%;
   filter:blur(8cqw);
   opacity:.2;
   animation:pulse 5s ease-in-out infinite alternate;
 }
-.glow.one{background:var(--purple);top:10%;left:-20%}
-.glow.two{background:var(--cyan);bottom:10%;right:-20%;animation-delay:-2s}
+
+.glow.one{
+  background:var(--purple);
+  top:10%;
+  left:-20%;
+}
+
+.glow.two{
+  background:var(--cyan);
+  bottom:10%;
+  right:-20%;
+  animation-delay:-2s;
+}
+
 @keyframes pulse{
   to{transform:scale(1.4);opacity:.35}
 }
+
+/* SCANLINES */
 .scanlines{
-  position:absolute;inset:0;
-  pointer-events:none;opacity:.1;
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.1;
   background:repeating-linear-gradient(
-    to bottom,transparent 0 3px,#000 4px 5px
+    to bottom,
+    transparent 0 3px,
+    #000 4px 5px
   );
 }
+
+/* MAIN CONTENT */
 .content{
-  position:relative;z-index:2;
-  width:88cqw;text-align:center;
+  position:relative;
+  z-index:2;
+  width:88cqw;
+  text-align:center;
   padding:5cqw 2cqw;
 }
+
+/* TOP LABEL */
 .topline{
   font-size:2.2cqw;
   letter-spacing:.4em;
   color:var(--cyan);
-  margin-bottom:5cqw;
+  margin-bottom:8cqw;
   text-shadow:0 0 2cqw var(--cyan);
   animation:fade 3s ease-in-out infinite alternate;
 }
+
+/* MAIN TITLE */
 h1{
   margin:0;
-  font-size:11cqw;
-  line-height:1.05;
+  font-size:10cqw;
+  line-height:1.2;
   font-weight:900;
   letter-spacing:.03em;
   color:var(--white);
@@ -99,60 +152,127 @@ h1{
     -.4cqw -.4cqw 0 var(--cyan),
     0 0 3cqw var(--cyan),
     0 0 7cqw rgba(149,101,255,.8);
-  animation:titlemove 3s ease-in-out infinite,glitch 7s steps(1) infinite;
+  animation:
+    titlemove 3s ease-in-out infinite,
+    glitch 7s steps(1) infinite;
 }
+
+h1 span{
+  color:var(--cyan);
+  text-shadow:
+    0 0 1cqw var(--cyan),
+    0 0 4cqw var(--cyan),
+    0 0 8cqw var(--purple);
+}
+
 @keyframes titlemove{
   0%,100%{transform:scale(1)}
-  50%{transform:scale(1.045)}
+  50%{transform:scale(1.035)}
 }
+
 @keyframes glitch{
   0%,92%,95%,100%{filter:none}
-  93%{filter:drop-shadow(-.7cqw 0 var(--cyan)) drop-shadow(.7cqw 0 var(--pink))}
+  93%{
+    filter:
+      drop-shadow(-.7cqw 0 var(--cyan))
+      drop-shadow(.7cqw 0 var(--pink));
+  }
   94%{filter:drop-shadow(.5cqw 0 var(--purple))}
 }
+
+/* DIVIDER */
 .divider{
-  width:48cqw;height:.4cqw;
-  margin:6cqw auto;
-  background:linear-gradient(90deg,transparent,var(--cyan),var(--purple),transparent);
+  width:48cqw;
+  height:.4cqw;
+  margin:7cqw auto;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    var(--cyan),
+    var(--purple),
+    transparent
+  );
   box-shadow:0 0 2cqw var(--cyan);
 }
+
+/* MESSAGE */
 .message{
   font-family:Arial,sans-serif;
-  font-size:3.2cqw;
+  font-size:3.5cqw;
   font-weight:bold;
   letter-spacing:.12em;
-  line-height:1.6;
+  line-height:1.8;
   color:var(--white);
   text-shadow:0 0 2cqw rgba(85,243,255,.5);
   animation:fade 3s ease-in-out infinite alternate;
 }
+
+.message strong{
+  color:var(--cyan);
+  text-shadow:0 0 2cqw var(--cyan);
+}
+
 @keyframes fade{
   from{opacity:.65}
   to{opacity:1}
 }
+
+/* EQUALIZER */
 .equalizer{
-  display:flex;align-items:end;
+  display:flex;
+  align-items:end;
   justify-content:center;
-  gap:1cqw;height:5cqw;
-  margin:7cqw auto 0;
+  gap:1cqw;
+  width:48cqw;
+  height:5cqw;
+  margin:8cqw auto 0;
 }
+
 .equalizer span{
-  width:.8cqw;height:1cqw;
+  width:.8cqw;
+  height:1cqw;
   border-radius:5px;
   background:var(--cyan);
   box-shadow:0 0 1.5cqw var(--cyan);
   animation:bars .7s ease-in-out infinite alternate;
 }
+
 .equalizer span:nth-child(2n){
   background:var(--purple);
   box-shadow:0 0 1.5cqw var(--purple);
   animation-delay:-.3s;
 }
-.equalizer span:nth-child(3n){animation-delay:-.5s}
-@keyframes bars{to{height:4.5cqw}}
+
+.equalizer span:nth-child(3n){
+  animation-delay:-.5s;
+}
+
+@keyframes bars{
+  to{height:4.5cqw}
+}
+
+/* TOOBEY BRAND */
+.brand{
+  width:48cqw;
+  margin:3cqw auto 0;
+  text-align:center;
+  font-size:3.2cqw;
+  font-weight:900;
+  letter-spacing:.35em;
+  color:var(--cyan);
+  text-shadow:
+    0 0 1cqw var(--cyan),
+    0 0 3cqw var(--purple);
+  animation:fade 3s ease-in-out infinite alternate;
+}
+
+/* BOTTOM TEXT */
 .bottom{
-  position:absolute;z-index:2;
-  bottom:4.43cqh;left:0;width:100%;
+  position:absolute;
+  z-index:2;
+  bottom:4.43cqh;
+  left:0;
+  width:100%;
   text-align:center;
   color:rgba(210,220,255,.65);
   font-size:1.7cqw;
@@ -161,23 +281,34 @@ h1{
 }
 </style>
 </head>
+
 <body>
+
 <main class="screen">
+
   <div class="stars"></div>
+
   <div class="glow one"></div>
   <div class="glow two"></div>
+
   <div class="scanlines"></div>
 
   <section class="content">
-    <div class="topline">GAME OVER · STREAM OFFLINE</div>
 
-    <h1>STREAM<br>ENDED</h1>
+    <div class="topline">
+      GAME OVER · STREAM OFFLINE
+    </div>
+
+    <h1>
+      STREAM<br>
+      <span>ENDED</span>
+    </h1>
 
     <div class="divider"></div>
 
     <div class="message">
       THANKS FOR<br>
-      WATCHING!
+      <strong>WATCHING!</strong>
     </div>
 
     <div class="equalizer">
@@ -187,11 +318,18 @@ h1{
       <span></span><span></span><span></span>
       <span></span>
     </div>
+
+    <div class="brand">
+      @TOOBEY
+    </div>
+
   </section>
 
   <div class="bottom">
     THANK YOU FOR BEING PART OF THE GAME
   </div>
+
 </main>
+
 </body>
 </html>
