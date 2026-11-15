@@ -118,7 +118,7 @@ body{
   );
 }
 
-/* CONTENT */
+/* MAIN CONTENT */
 .content{
   position:relative;
   z-index:2;
@@ -132,26 +132,9 @@ body{
   font-size:2.2cqw;
   letter-spacing:.4em;
   color:var(--cyan);
-  margin-bottom:7cqw;
+  margin-bottom:8cqw;
   text-shadow:0 0 2cqw var(--cyan);
   animation:fade 3s ease-in-out infinite alternate;
-}
-
-/* TOOBEY BRAND */
-.brand{
-  font-size:9cqw;
-  font-weight:900;
-  letter-spacing:.16em;
-  color:var(--white);
-  margin-bottom:5cqw;
-  text-shadow:
-    0 0 1cqw var(--white),
-    .4cqw .4cqw 0 var(--purple),
-    -.4cqw -.4cqw 0 var(--cyan),
-    0 0 3cqw var(--cyan),
-    0 0 7cqw rgba(149,101,255,.8);
-  animation:titlemove 3s ease-in-out infinite,
-  glitch 7s steps(1) infinite;
 }
 
 /* MAIN TITLE */
@@ -169,8 +152,9 @@ h1{
     -.4cqw -.4cqw 0 var(--cyan),
     0 0 3cqw var(--cyan),
     0 0 7cqw rgba(149,101,255,.8);
-  animation:titlemove 3s ease-in-out infinite,
-  glitch 7s steps(1) infinite;
+  animation:
+    titlemove 3s ease-in-out infinite,
+    glitch 7s steps(1) infinite;
 }
 
 h1 span{
@@ -228,12 +212,18 @@ h1 span{
   text-shadow:0 0 2cqw var(--cyan);
 }
 
+@keyframes fade{
+  from{opacity:.65}
+  to{opacity:1}
+}
+
 /* EQUALIZER */
 .equalizer{
   display:flex;
   align-items:end;
   justify-content:center;
   gap:1cqw;
+  width:48cqw;
   height:5cqw;
   margin:8cqw auto 0;
 }
@@ -261,7 +251,22 @@ h1 span{
   to{height:4.5cqw}
 }
 
-/* BOTTOM */
+/* TOOBEY BRAND */
+.brand{
+  width:48cqw;
+  margin:3cqw auto 0;
+  text-align:center;
+  font-size:3.2cqw;
+  font-weight:900;
+  letter-spacing:.35em;
+  color:var(--cyan);
+  text-shadow:
+    0 0 1cqw var(--cyan),
+    0 0 3cqw var(--purple);
+  animation:fade 3s ease-in-out infinite alternate;
+}
+
+/* BOTTOM TEXT */
 .bottom{
   position:absolute;
   z-index:2;
@@ -273,11 +278,6 @@ h1 span{
   font-size:1.7cqw;
   letter-spacing:.25em;
   text-shadow:0 0 1cqw var(--cyan);
-}
-
-@keyframes fade{
-  from{opacity:.65}
-  to{opacity:1}
 }
 </style>
 </head>
@@ -299,10 +299,6 @@ h1 span{
       TIKTOK LIVE · GET READY
     </div>
 
-    <div class="brand">
-      TOOBEY
-    </div>
-
     <h1>
       STARTING<br>
       <span>SOON</span>
@@ -321,6 +317,10 @@ h1 span{
       <span></span><span></span><span></span>
       <span></span><span></span><span></span>
       <span></span>
+    </div>
+
+    <div class="brand">
+      TOOBEY
     </div>
 
   </section>
