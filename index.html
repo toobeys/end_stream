@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Stream - End Stream</title>
+<style>
+:root { --cyan:#00eaff; --purple:#8b35ff; --pink:#ff3bc8; --ink:#050718; }
+* { box-sizing:border-box; }
+html,body { margin:0; width:100%; height:100%; overflow:hidden; font-family:system-ui,Segoe UI,Arial,sans-serif; color:#f5f8ff; background:#030510; }
+body { display:grid; place-items:center; }
+.stage { position:relative; width:min(100vw,56.25vh); height:min(100vh,177.78vw); aspect-ratio:9/16; overflow:hidden; background:
+ radial-gradient(ellipse at 70% 22%, #28216c 0%, transparent 34%),
+ radial-gradient(ellipse at 20% 65%, #251052 0%, transparent 38%),
+ linear-gradient(160deg,#080b28 0%,#09051b 55%,#02040c 100%); }
+.aurora { position:absolute; inset:-15% -30%; pointer-events:none; overflow:hidden; opacity:.8; filter:blur(28px); z-index:0; }
+.aurora::before, .aurora::after { content:""; position:absolute; width:150%; height:65%; left:-20%; border-radius:50%;
+ background:conic-gradient(from 210deg at 50% 50%, transparent 0 22%, #17f7dc33 28%, #5c32ff55 38%, #ff40d033 48%, transparent 58% 100%);
+ animation:auroraWave 18s ease-in-out infinite alternate; transform:rotate(-12deg); }
+.aurora::after { top:22%; left:18%; opacity:.65; background:conic-gradient(from 70deg at 50% 50%, transparent 0 24%, #21eaff35 33%, #8c3cff66 42%, #30ffc833 52%, transparent 63% 100%); animation-duration:24s; animation-direction:alternate-reverse; }
+.grid { position:absolute; inset:0; opacity:.22; background-image:linear-gradient(#342d88 1px,transparent 1px),linear-gradient(90deg,#342d88 1px,transparent 1px); background-size:36px 36px; transform:perspective(450px) rotateX(55deg) scale(1.5); transform-origin:bottom; mask-image:linear-gradient(to bottom,transparent 25%,black 100%); }
+.stars { position:absolute; inset:0; background-image:radial-gradient(#fff 1px,transparent 1.5px),radial-gradient(#00eaff 1px,transparent 1.5px); background-size:90px 120px,145px 180px; background-position:12px 30px,40px 80px; opacity:.6; animation:twinkle 3s infinite alternate; }
+.orb { position:absolute; width:65vw; max-width:320px; aspect-ratio:1; border-radius:50%; filter:blur(40px); opacity:.18; background:#733cff; top:22%; left:20%; animation:float 7s ease-in-out infinite; }
+.frame { position:absolute; inset:16px; border:1px solid #00dfff7a; box-shadow:inset 0 0 22px #00dfff17,0 0 15px #00dfff15; clip-path:polygon(0 0,28% 0,28% 1.2%,72% 1.2%,72% 0,100% 0,100% 100%,0 100%); }
+.top { position:absolute; top:4.5%; left:7%; right:7%; display:flex; justify-content:space-between; align-items:center; }
+.logo { font-weight:900; letter-spacing:3px; color:var(--cyan); text-shadow:0 0 14px #00eaff; font-size:clamp(12px,3.7vw,18px); }
+.status { font-size:11px; letter-spacing:2px; border:1px solid #ff396c; padding:7px 11px; border-radius:4px; color:#ff477d; box-shadow:0 0 12px #ff396c33; }
+.status:before { content:""; display:inline-block; width:7px;height:7px; border-radius:50%; background:#ff315f; margin-right:7px; box-shadow:0 0 8px #ff315f; }
+.arcade { position:absolute; top:11%; left:50%; transform:translateX(-50%); color:#8d4aff; font-size:clamp(12px,4vw,17px); font-weight:900; letter-spacing:7px; text-shadow:0 0 12px #923bff; white-space:nowrap; }
+.controller { position:absolute; top:15%; left:50%; transform:translateX(-50%); font-size:clamp(42px,14vw,65px); filter:drop-shadow(0 0 18px #00dfff); animation:bob 3s ease-in-out infinite; }
+.title { position:absolute; top:25%; left:5%; right:5%; text-align:center; line-height:.9; font-weight:1000; letter-spacing:-1px; text-transform:uppercase; }
+.title .a { display:block; font-size:clamp(42px,13vw,64px); color:#f4f7ff; -webkit-text-stroke:1px #66eaff; text-shadow:3px 5px 0 #3a0b86,0 0 22px #00dfff66; }
+.title .b { display:block; font-size:clamp(43px,14vw,69px); color:#ffc62e; -webkit-text-stroke:1px #fff0a4; text-shadow:4px 6px 0 #a13c00,0 0 22px #ffae0066; margin-top:8px; }
+.title .c { display:block; font-size:clamp(27px,8.5vw,42px); font-style:italic; color:#d05cff; text-shadow:0 0 16px #a000ff; margin-top:8px; letter-spacing:3px; }
+.subtitle { position:absolute; top:43%; left:8%; right:8%; text-align:center; color:#b7caff; font-size:12px; letter-spacing:3px; }
+.countbox { position:absolute; top:47%; left:17%; right:17%; padding:8px 6px 10px; text-align:center; background:linear-gradient(90deg,#0c1437cc,#09051bcc); border:1px solid #00eaff; clip-path:polygon(8% 0,92% 0,100% 20%,100% 80%,92% 100%,8% 100%,0 80%,0 20%); box-shadow:0 0 22px #00dfff20; }
+.countlabel { color:#00eaff; font-size:9px; letter-spacing:2px; margin-bottom:5px; }
+.count { font:900 clamp(25px,7vw,36px)/1 monospace; letter-spacing:2px; text-shadow:0 0 14px #00eaff66; }
+.tip { position:absolute; top:61%; left:10%; right:10%; text-align:center; font-size:13px; line-height:1.6; color:#e2d8ff; }
+.tip strong { color:#00eaff; letter-spacing:1px; }
+.press { position:absolute; top:69%; left:50%; transform:translateX(-50%); border:1px solid #9b4cff; border-radius:5px; padding:10px 22px; color:#d9a6ff; font-weight:900; letter-spacing:3px; text-shadow:0 0 12px #b34cff; animation:pulse 1.5s infinite; white-space:nowrap; }
+.cat { position:absolute; bottom:8.5%; right:8%; font-size:30px; filter:drop-shadow(0 0 9px #b45cff); }
+.social { position:absolute; bottom:4.5%; left:7%; right:7%; display:flex; justify-content:space-around; color:#a9b5d8; font-size:9px; letter-spacing:1px; }
+.social span { border:1px solid #5a37ac; padding:8px 10px; border-radius:4px; background:#0b0d25; }
+.corner { position:absolute; width:32px;height:32px;border-color:#00eaff;border-style:solid; }
+.corner.tl{top:10px;left:10px;border-width:2px 0 0 2px}.corner.tr{top:10px;right:10px;border-width:2px 2px 0 0}.corner.bl{bottom:10px;left:10px;border-width:0 0 2px 2px}.corner.br{bottom:10px;right:10px;border-width:0 2px 2px 0}
+@keyframes auroraWave{0%{transform:translate(-4%, -8%) rotate(-14deg) scale(1)}100%{transform:translate(7%, 9%) rotate(8deg) scale(1.18)}} @keyframes twinkle{to{opacity:.25}} @keyframes float{50%{transform:translateY(-20px) scale(1.05)}} @keyframes bob{50%{transform:translate(-50%,-8px)}} @keyframes pulse{50%{opacity:.55;box-shadow:0 0 18px #b34cff66}}
+@media (min-width:700px){.stage{border-radius:12px;box-shadow:0 0 80px #4c1b9d55}.countbox{top:48%}}
+
+/* Layout refinement: smaller typography and clear vertical zones */
+.title { top:23%; }
+.title .a { font-size:clamp(36px,11vw,54px); }
+.title .b { font-size:clamp(36px,11.5vw,58px); margin-top:6px; }
+.title .c { font-size:clamp(24px,7.5vw,36px); margin-top:6px; }
+.subtitle { top:41.5%; font-size:10px; letter-spacing:2px; }
+.countbox { top:46.5%; padding:14px 8px 16px; }
+.countlabel { font-size:9px; margin-bottom:6px; letter-spacing:2px; }
+.count { font-size:clamp(32px,9.5vw,46px); }
+.tip { top:60.5%; font-size:12px; line-height:1.45; }
+.press { top:68%; padding:8px 18px; font-size:13px; }
+.pixelworld { bottom:13%; height:10%; }
+.cat { bottom:8.8%; font-size:26px; }
+.social { bottom:4%; font-size:8px; }
+.social span { padding:7px 8px; }
+@media (max-height:700px) {
+  .title { top:21%; }
+  .subtitle { top:39.5%; }
+  .countbox { top:44.5%; }
+  .tip { top:58.5%; }
+  .press { top:66%; }
+  .pixelworld { bottom:12.5%; height:9%; }
+}
+
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="aurora"></div><div class="grid"></div><div class="stars"></div><div class="orb"></div><div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+  <div class="top"><div class="logo">PLAYER ZONE</div><div class="status">STREAM READY</div></div>
+  <div class="arcade">◆ PLAYER ZONE ◆</div>
+  <div class="controller">🏆</div>
+  <div class="title"><span class="a">STREAM</span><span class="b">ENDED</span><span class="c">GG!</span></div>
+  <div class="subtitle">THANKS FOR PLAYING WITH ME</div>
+  <div class="countbox"><div class="countlabel">SESSION COMPLETE</div><div class="count" style="font-size:clamp(20px,6vw,32px)">SAVE • EXIT • REPEAT</div></div>
+  <div class="tip">Thanks for hanging out!<br><strong>See you in the next game.</strong></div>
+  <div class="press">@Its.Toobey</div>
+  
+  <div class="cat">🐱</div>
+  <div class="social"><span>♥ FOLLOW</span><span>★ THANKS</span><span>⚡ GG</span></div>
+</div>
+<script>/* Static end-stream screen */</script>
+</body>
+</html>
